@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expend-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <h3 class="text-light">Employee Dashboard</h3>
+        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="clickAdd()">
+            <b>+ </b>
+            Add New Employee
+        </button>
+    </div>
+</nav>
+
+<table class="table text-center mt-5">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Telephone</th>
+            <th>Salary</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of employeeData">
+            <td>{{data.id}}</td>
+            <td>{{data.firstName}}</td>
+            <td>{{data.lastName}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.telephone}}</td>
+            <td>{{data.salary}}</td>
+            <td>
+                <button class="btn btn-danger me-3" (click)="deleteEmployee(data.id)">Delete</button>
+                <button class="btn btn-info text-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="clickEdit(data)" >Update</button>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Emplyee Dashboard</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close"></button>
+      </div>
+      <div class="modal-body">
+        <form  [formGroup]="formEmployee">
+            Firstname
+            <input type="text" class="form-control" formControlName="firstName">
+            Lastname
+            <input type="text" class="form-control" formControlName="lastName">
+            Email
+            <input type="text" class="form-control" formControlName="email">
+            Telephone
+            <input type="text" class="form-control" formControlName="telephone">
+            Salary
+            <input type="text" class="form-control" formControlName="salary">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="postEmployee()" *ngIf="showAdd">Save</button>
+        <button type="button" class="btn btn-primary" *ngIf="showEdit" (click)="updateEmployee()">Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
