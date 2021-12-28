@@ -6,11 +6,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
+import { ProductsDashboardComponent } from './products-dashboard/products-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeDashboardComponent
+    EmployeeDashboardComponent,
+    ProductsDashboardComponent
   ],
   imports: [
     BrowserModule,

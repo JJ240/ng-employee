@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expend-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <h3 class="text-light">Product Dashboard</h3>
+        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="clickAdd()">
+            <b>+ </b>
+            Add New Product
+        </button>
+    </div>
+</nav>
+
+<table class="table text-center mt-5">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of productData">
+            <td>{{data.id}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.price}}</td>
+            <td>{{data.stock}}</td>
+            <td><img src="{{data.image}}" alt="" style="height: 50px; width: 50px;"></td>
+            <td>
+                <button class="btn btn-danger me-3" (click)="deleteProduct(data.id)">Delete</button>
+                <button class="btn btn-info text-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="clickEdit(data)" >Update</button>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Product Dashboard</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close"></button>
+      </div>
+      <div class="modal-body">
+        <form  [formGroup]="formProduct">
+            Name
+            <input type="text" class="form-control" formControlName="name">
+            Price
+            <input type="text" class="form-control" formControlName="price">
+            Stock
+            <input type="text" class="form-control" formControlName="stock">
+            Image
+            <input type="text" class="form-control" formControlName="image">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="postProduct()" *ngIf="showAdd">Save</button>
+        <button type="button" class="btn btn-primary" *ngIf="showEdit" (click)="updateProduct()">Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
